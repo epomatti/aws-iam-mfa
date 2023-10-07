@@ -75,7 +75,6 @@ This is the recommended configuration:
 "Condition" : { "BoolIfExists" : { "aws:MultiFactorAuthPresent" : "false" } }
 ```
 
-
 ## Clean-up
 
 Delete the keys:
