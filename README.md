@@ -2,13 +2,13 @@
 
 Enforcing MFA for IAM logins. Here is a short summary of configuration options:
 
-(Not recommended) Deny temporary credentials, allow long-term credentials.
+- Deny temporary credentials, allow long-term credentials. (Not recommended)
 
 ```json
 "Effect" : "Deny",
 "Condition" : { "Bool" : { "aws:MultiFactorAuthPresent" : "false" } }
 ```
-Deny temporary credentials <br/> Deny long-term credentials.
+- Deny temporary credentials <br/> Deny long-term credentials.
 
 ```json
 
@@ -16,14 +16,14 @@ Deny temporary credentials <br/> Deny long-term credentials.
 "Condition" : { "BoolIfExists" : { "aws:MultiFactorAuthPresent" : "false" } }
 ```
 
-Allow MFA-authenticated requests and AWS CLI or AWS API requests that are made using long-term credentials.
+- Allow MFA-authenticated requests and AWS CLI or AWS API requests that are made using long-term credentials.
 
 ```json
 "Effect" : "Allow",
 "Condition" : { "BoolIfExists" : { "aws:MultiFactorAuthPresent" : "true" } }
 ```
 
-Allow programmatic and console requests only when authenticated using MFA.
+- Allow programmatic and console requests only when authenticated using MFA.
 
 ```json
 "Effect" : "Allow",
