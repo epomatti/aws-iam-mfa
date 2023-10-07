@@ -77,16 +77,16 @@ This is the recommended configuration:
 
 ## Clean-up
 
+Destroy the infrastructure:
+
+```sh
+terraform destroy -auto-approve
+```
+
 Delete the keys:
 
 ```
 gpg --list-keys
 gpg --delete-secret-keys <KEY>
 gpg --delete-keys <KEY>
-```
-
-Destroy the infrastructure:
-
-```sh
-terraform destroy -auto-approve
 ```
