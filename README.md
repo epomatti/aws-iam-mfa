@@ -2,12 +2,27 @@
 
 Enforcing MFA for IAM logins.
 
-| Effect | Condition  | Results
-| -------|--------------------------|---------------
-| `Deny` | `{ "Bool" : { "aws:MultiFactorAuthPresent" : "false" } }` | Deny temporary credentials <br/> Allow long-term credentials |
-| `Deny` | `{ "BoolIfExists" : { "aws:MultiFactorAuthPresent" : "false" } }` | Deny temporary credentials <br/> Deny long-term credentials |
-| `Deny` | `{ "BoolIfExists" : { "aws:MultiFactorAuthPresent" : "true" } }` | Allow MFA-authenticated requests and AWS CLI or AWS API requests that are made using long-term credentials. |
-| `Allow` | `{ "Bool" : { "aws:MultiFactorAuthPresent" : "true" } }` | Allow programmatic and console requests only when authenticated using MFA |
+Here is a short summary of configuration options:
+
+```json
+// (Not recommended) Deny temporary credentials, allow long-term credentials.
+"Effect" : "Deny",
+"Condition" : { "Bool" : { "aws:MultiFactorAuthPresent" : "false" } }
+
+// Deny temporary credentials <br/> Deny long-term credentials.
+"Effect" : "Deny",
+"Condition" : { "BoolIfExists" : { "aws:MultiFactorAuthPresent" : "false" } }
+
+// Allow MFA-authenticated requests and AWS CLI or AWS API requests that are made using long-term credentials.
+"Effect" : "Allow",
+"Condition" : { "BoolIfExists" : { "aws:MultiFactorAuthPresent" : "true" } }
+
+// Allow programmatic and console requests only when authenticated using MFA.
+"Effect" : "Allow",
+"Condition" : { "Bool" : { "aws:MultiFactorAuthPresent" : "true" } }
+```
+
+In a policy with `Deny` effect and when using the condition `BoolIfExists`, if the key `aws:MultiFactorAuthPresent` is not present in the context, it evaluates to `true`, meaning that the the `Deny` effect is applied. And if the key `aws:MultiFactorAuthPresent` is present but it's value is `false` (meaning that no MFA is present), then it also asserts to a `Deny`.
 
 ## Setup
 
