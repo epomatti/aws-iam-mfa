@@ -8,7 +8,7 @@ Enforcing MFA for IAM logins. Here is a short summary of configuration options:
 "Effect" : "Deny",
 "Condition" : { "Bool" : { "aws:MultiFactorAuthPresent" : "false" } }
 ```
-- Deny temporary credentials <br/> Deny long-term credentials.
+- Deny temporary credentials, deny long-term credentials.
 
 ```json
 
