@@ -1,4 +1,4 @@
-# aws-iam-mfa
+# AWS IAM MFA
 
 Enforcing MFA for IAM logins. Here is a short summary of configuration options:
 
@@ -97,6 +97,18 @@ This is the recommended configuration:
 "Effect" : "Deny",
 "Condition" : { "BoolIfExists" : { "aws:MultiFactorAuthPresent" : "false" } }
 ```
+
+To authenticate using MFA while using the CLI, follow the steps in the [documentation](https://repost.aws/knowledge-center/authenticate-mfa-cli).
+
+Instruct users to run the `aws sts get-session-token` CLI command and pass the multi-factor authentication `--serial-number` and `--token-code` parameters. Use these resulting values to make API/CLI calls.
+
+```sh
+# Snippet only
+aws sts get-session-token --serial-number arn-of-the-mfa-device --token-code code-from-token
+```
+
+Read the documentation for a complete reference.
+
 
 ## Clean-up
 
